@@ -2,8 +2,8 @@
 import User from '../assets/user.png';
 const Navbar = () => {
     return (
-        <div className="bg-white shadow">
-        <div className="container mx-auto py-4 px-6 flex justify-between items-center">
+        <div className="bg-white">
+        <div className="max-w-6xl mx-auto py-4 px-6 flex justify-between items-center shadow-md border-b">
           <img src='' alt="EasyTak Logo" className="h-10" />
           <div className='border rounded-full cursor-pointer'>
             <img

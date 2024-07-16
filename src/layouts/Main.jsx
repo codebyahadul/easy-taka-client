@@ -1,10 +1,16 @@
 import { Outlet } from "react-router-dom";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 const Main = () => {
     return (
-        <div className="max-w-6xl mx-auto">
-            <Outlet />
-        </div>
+        <>
+            <Navbar />
+            <div className="max-w-6xl mx-auto min-h-[calc(100vh-130px)]">
+                <Outlet />
+            </div>
+            <Footer />
+        </>
     );
 };
 

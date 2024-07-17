@@ -1,8 +1,10 @@
 import axios from 'axios';
-import bcrypt from 'bcryptjs';
+import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../provider/AuthProvider';
 const Register = () => {
   const navigate = useNavigate()
+  const {register} = useContext(AuthContext);
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
@@ -13,18 +15,17 @@ const Register = () => {
     if (/^\d{5}$/.test(password) != true) {
       return alert("Password must be 5 digit")
     }
-    const saltRounds = 5;
-      const hashedPassword = await bcrypt.hash(password, saltRounds);
       const userInfo = {
         name,
         mobile,
         email,
-        password: hashedPassword,
+        password,
         role: 'user',
         status: 'pending'
       }
-      const {data} = await axios.post('http://localhost:5000/users', userInfo)
+      const {data} = await axios.post('http://localhost:5000/register', userInfo)
       if(data.insertedId){
+        register(userInfo)
         navigate('/')
         alert('successfully register')
       }

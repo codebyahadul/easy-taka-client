@@ -1,6 +1,12 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../provider/AuthProvider";
 
 const Navbar = () => {
+  const {logout} = useContext(AuthContext)
+  const handleLogOut = () => {
+    logout()
+  }
     return (
         <div className="bg-white border-b">
         <div className="max-w-6xl mx-auto py-4 px-6 flex justify-between items-center">
@@ -9,8 +15,8 @@ const Navbar = () => {
             <li className="group flex flex-col">
               Services<span className="mt-[1px] h-[3px] w-[0px] rounded-full bg-gray-500 transition-all duration-300 group-hover:w-full"></span>
             </li>
-            <li className="group flex flex-col">
-              About Us<span className="mt-[1px] h-[3px] w-[0px] rounded-full bg-gray-500 transition-all duration-300 group-hover:w-full"></span>
+            <li onClick={handleLogOut} className="group flex flex-col">
+              Log Out<span className="mt-[1px] h-[3px] w-[0px] rounded-full bg-gray-500 transition-all duration-300 group-hover:w-full"></span>
             </li>
           </ul>
         </div>

@@ -13,11 +13,13 @@ export const AuthProvider = ({ children }) => {
             setUser(savedUser);
         }
     }, []);
-
+    const register = (user) => {
+        localStorage.setItem('user', JSON.stringify(user));
+        setUser(user);
+    }
     const login = (user) => {
         localStorage.setItem('user', JSON.stringify(user));
         setUser(user);
-        Navigate(`/${user.role}-dashboard`);
     };
 
     const logout = () => {
@@ -28,7 +30,8 @@ export const AuthProvider = ({ children }) => {
     const authInfo = {
         user,
         login,
-        logout
+        logout,
+        register
     }
     return (
         <AuthContext.Provider value={authInfo}>

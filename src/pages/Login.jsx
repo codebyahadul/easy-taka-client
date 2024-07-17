@@ -1,12 +1,26 @@
-import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../provider/AuthProvider";
+import axios from "axios";
 
 const Login = () => {
-  const handleSubmit = (e) => {
+  const {login} = useContext(AuthContext)
+  const navigate = useNavigate()
+  const handleSubmit = async(e) => {
     e.preventDefault();
     const form = e.target;
-    const mobile = form.mobileOrEmail.value;
+    const mobileOrEmail = form.mobileOrEmail.value;
     const password = form.password.value;
-    
+    const userInfo = {
+      mobileOrEmail,
+      password
+    }
+    const {data} = await axios.post('http://localhost:5000/login', userInfo)
+    if(data.message === true){
+      navigate('/')
+      alert("log in successfully")
+      login(userInfo)
+    }
   };
 
   return (

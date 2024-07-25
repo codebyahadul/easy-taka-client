@@ -1,7 +1,9 @@
+/* eslint-disable react/no-unescaped-entities */
 import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const {login} = useContext(AuthContext)
@@ -18,7 +20,7 @@ const Login = () => {
     const {data} = await axios.post('http://localhost:5000/login', userInfo)
     if(data.message === true){
       navigate('/')
-      alert("log in successfully")
+      toast.success("log in successfully")
       login(userInfo)
     }
   };
@@ -45,7 +47,7 @@ const Login = () => {
               Log In
             </button>
           </form>
-          <p className="text-sm">Don't have account? <Link to='/register' className="text-gray-500 font-semibold hover:text-red-400"> Register Now</Link></p>
+          <p className="text-sm">Don't have an account? <Link to='/register' className="text-gray-500 font-semibold hover:text-red-400"> Register Now</Link></p>
         </div>
       </div>
     </div>

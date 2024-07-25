@@ -1,51 +1,68 @@
-import { Link } from "react-router-dom";
-
+import { useContext } from "react";
+import { AuthContext } from "../provider/AuthProvider";
+import { BiSend } from "react-icons/bi";
+import { IoCashOutline } from "react-icons/io5";
+import Cashback from '../assets/cashback.png';
 const Banner = () => {
+    const { user } = useContext(AuthContext)
     return (
-        <div className="flex-grow flex items-center justify-center">
-        <section className="w-full py-12 md:py-24 flex justify-center bg-white flex-col lg:py-32 bg-gradient-to-b from-#52C2FF to-white">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center space-y-4 text-center text-black">
-              {/* Text content */}
-              <div className="space-y-2">
-                <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl">
-                  Welcome to Easy Taka
-                </h1>
-                <p className="mx-auto max-w-[700px]">
-                Revolutionizing Mobile Financial Services with Innovation and Simplicity.
-                </p>
-              </div>
-              <div className="space-x-4">
-                <Link to='/login' className="inline-flex h-9 items-center justify-center rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white shadow transition-colors hover:bg-gray-700 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50" href="#">
-                  Login Now
-                </Link>
-                <Link to='/register' className="inline-flex h-9 items-center justify-center rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white shadow transition-colors hover:bg-gray-700 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50" href="#">
-                  Registration Now
-                </Link>
-              </div>
+        <div>
+            <h1 className="text-lg md:text-xl font-medium my-3 md:my-5">Top Services:</h1>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 items-center gap-5 md:gap-8 *:border-2 *:rounded-md *:w-[100px] *:md:w-[200px] *:lg:w-[250px] *:h-[80px] *:p-3 *:md:p-5 *:cursor-pointer *:flex *:items-center">
+                <div className="hover:bg-gray-200">
+                    <button className="flex items-center gap-2 text-xs md:text-sm lg:text-lg font-medium">
+                        <BiSend size={20} />Send Money
+                    </button>
+                </div>
+                <div className="hover:bg-gray-200">
+                    <button className="flex items-center gap-2 text-xs md:text-sm lg:text-lg font-medium">
+                        <IoCashOutline size={20} /> Cash Out
+                    </button>
+                </div>
+                <div className="hover:bg-gray-200">
+                    <button className="flex items-center gap-2 text-xs md:text-sm lg:text-lg font-medium">
+                        <IoCashOutline size={20} /> Mobile Recharge
+                    </button>
+                </div>
+                <div className="hover:bg-gray-200">
+                    <button className="flex items-center gap-2 text-xs md:text-sm lg:text-lg font-medium">
+                        <IoCashOutline size={20} /> Add Money
+                    </button>
+                </div>
             </div>
-          </div>
-          {/* Feature Cards */}
-          <div className="container px-4 md:px-6 mt-16 flex flex-wrap justify-center items-center gap-9">
-            <div className="flex flex-col items-center text-center text-black">
-              <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="h-10 w-10 mb-4"><circle cx={12} cy={12} r={10} /><line x1={2} x2={22} y1={12} y2={12} /><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" /></svg>
-              <h3 className="text-lg font-semibold">Global Reach</h3>
-              <p className="text-sm">Access content from all around the world.</p>
+            <div>
+                <h1 className="text-lg md:text-xl font-medium my-3 md:my-5">Popular Offers: </h1>
+                <div className="flex flex-col md:flex-row flex-wrap items-center gap-5 md:gap-10">
+                    <div className="w-full max-w-[340px] space-y-3 rounded-xl bg-gray-100 p-4 shadow-lg">
+                        <div className=" flex h-40 w-full justify-center lg:h-[260px]">
+                            <img width={260} height={260} className="h-full w-full rounded-lg " src={Cashback} alt="offer img" />
+                        </div>
+                        <div className="space-y-2 font-semibold">
+                            <h6 className="text-sm md:text-base lg:text-lg">100 tk Cashback</h6>
+                            <p className="text-xs font-semibold text-gray-500 md:text-sm">Add 5000 or more money from any bank and get the cashback</p>
+                        </div>
+                    </div>
+                    <div className="w-full max-w-[340px] space-y-3 rounded-xl bg-gray-100 p-4 shadow-lg">
+                        <div className=" flex h-40 w-full justify-center lg:h-[260px]">
+                            <img width={260} height={260} className="h-full w-full rounded-lg " src={Cashback} alt="offer img" />
+                        </div>
+                        <div className="space-y-2 font-semibold">
+                            <h6 className="text-sm md:text-base lg:text-lg">100 tk Cashback</h6>
+                            <p className="text-xs font-semibold text-gray-500 md:text-sm">Add 5000 or more money from any bank and get the cashback</p>
+                        </div>
+                    </div>
+                    <div className="w-full max-w-[340px] space-y-3 rounded-xl bg-gray-100 p-4 shadow-lg">
+                        <div className=" flex h-40 w-full justify-center lg:h-[260px]">
+                            <img width={260} height={260} className="h-full w-full rounded-lg " src={Cashback} alt="offer img" />
+                        </div>
+                        <div className="space-y-2 font-semibold">
+                            <h6 className="text-sm md:text-base lg:text-lg">100 tk Cashback</h6>
+                            <p className="text-xs font-semibold text-gray-500 md:text-sm">Add 5000 or more money from any bank and get the cashback</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div className="flex flex-col items-center text-center text-black">
-              <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="h-10 w-10 mb-4"><path d="M6 16.326A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 .5 8.973" /><path d="m13 12-3 5h4l-3 5" /></svg>
-              <h3 className="text-lg font-semibold">Fast and Efficient</h3>
-              <p className="text-sm">Experience lightning fast load times.</p>
-            </div>
-            <div className="flex flex-col items-center text-center text-black">
-              <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="h-10 w-10 mb-4"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" /></svg>
-              <h3 className="text-lg font-semibold">Loved by Users</h3>
-              <p className="text-sm">Join our community of happy users.</p>
-            </div>
-          </div>
-        </section>
-
-      </div>
+        </div>
     );
 };
 

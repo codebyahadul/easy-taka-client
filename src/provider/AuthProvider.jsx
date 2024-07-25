@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import { createContext, useState, useEffect } from 'react';
+import toast from 'react-hot-toast';
 import { Navigate } from 'react-router-dom';
 
 export const AuthContext = createContext();
@@ -25,6 +26,7 @@ export const AuthProvider = ({ children }) => {
     const logout = () => {
         localStorage.removeItem('user');
         setUser(null);
+        toast.success('Logout success')
         Navigate('/login');
     };
     const authInfo = {

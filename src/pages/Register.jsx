@@ -25,7 +25,7 @@ const Register = () => {
       }
       const {data} = await axios.post('http://localhost:5000/register', userInfo)
       if(data.insertedId){
-        register(userInfo)
+        register({status:true})
         navigate('/')
         alert('successfully register')
       }

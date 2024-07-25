@@ -21,7 +21,7 @@ const Login = () => {
     if(data.message === true){
       navigate('/')
       toast.success("log in successfully")
-      login(userInfo)
+      login({status: true})
     }
   };
 

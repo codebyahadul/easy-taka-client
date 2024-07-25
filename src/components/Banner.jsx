@@ -1,32 +1,58 @@
-import { useContext } from "react";
-import { AuthContext } from "../provider/AuthProvider";
 import { BiSend } from "react-icons/bi";
-import { IoCashOutline } from "react-icons/io5";
+import { IoBook, IoCashOutline } from "react-icons/io5";
 import Cashback from '../assets/cashback.png';
+import { TbRecharging } from "react-icons/tb";
+import { SiRemedyentertainment } from "react-icons/si";
+import { FaAddressCard, FaHandHoldingUsd, FaLightbulb } from "react-icons/fa";
 const Banner = () => {
-    const { user } = useContext(AuthContext)
     return (
         <div>
             <h1 className="text-lg md:text-xl font-medium my-3 md:my-5">Top Services:</h1>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 items-center gap-5 md:gap-8 *:border-2 *:rounded-md *:w-[100px] *:md:w-[200px] *:lg:w-[250px] *:h-[80px] *:p-3 *:md:p-5 *:cursor-pointer *:flex *:items-center">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 items-center gap-5 md:gap-8 *:border-2 *:rounded-md *:w-[100px] *:md:w-[200px] *:lg:w-[200px] *:h-[110px] *:p-3 *:md:p-5 *:cursor-pointer *:flex *:items-center *:flex-col *:justify-center *:gap-1">
                 <div className="hover:bg-gray-200">
-                    <button className="flex items-center gap-2 text-xs md:text-sm lg:text-lg font-medium">
-                        <BiSend size={20} />Send Money
+                    <BiSend size={30} />
+                    <button className="text-xs md:text-sm lg:text-lg font-medium">Send Money </button>
+                </div>
+                <div className="hover:bg-gray-200">
+                    <IoCashOutline size={30} />
+                    <button className="text-xs md:text-sm lg:text-lg font-medium">
+                        Cash Out
                     </button>
                 </div>
                 <div className="hover:bg-gray-200">
-                    <button className="flex items-center gap-2 text-xs md:text-sm lg:text-lg font-medium">
-                        <IoCashOutline size={20} /> Cash Out
+                    <TbRecharging size={30} />
+                    <button className="text-xs md:text-sm lg:text-lg font-medium">
+                        Mobile Recharge
                     </button>
                 </div>
                 <div className="hover:bg-gray-200">
-                    <button className="flex items-center gap-2 text-xs md:text-sm lg:text-lg font-medium">
-                        <IoCashOutline size={20} /> Mobile Recharge
+                    <FaAddressCard size={30} />
+                    <button className="text-xs md:text-sm lg:text-lg font-medium">
+                        Add Money
                     </button>
                 </div>
                 <div className="hover:bg-gray-200">
-                    <button className="flex items-center gap-2 text-xs md:text-sm lg:text-lg font-medium">
-                        <IoCashOutline size={20} /> Add Money
+                    <FaLightbulb size={30} />
+                    <button className="text-xs md:text-sm lg:text-lg font-medium">
+                        Pay Bill
+                    </button>
+                </div>
+                <div className="hover:bg-gray-200">
+                    <SiRemedyentertainment size={30} />
+                    <button className="text-xs md:text-sm lg:text-lg font-medium">
+                        Remittance
+                    </button>
+                </div>
+                <div className="hover:bg-gray-200">
+                    <IoBook size={30} />
+                    <button className="text-xs md:text-sm lg:text-lg font-medium">
+                        Education Fee
+                    </button>
+                </div>
+                <div className="hover:bg-gray-200">
+                    <FaHandHoldingUsd size={30} />
+                    <button className="text-xs md:text-sm lg:text-lg font-medium">
+                        Loan
                     </button>
                 </div>
             </div>

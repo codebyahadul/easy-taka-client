@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../provider/AuthProvider';
+import toast from 'react-hot-toast';
 const Register = () => {
   const navigate = useNavigate()
   const {register} = useContext(AuthContext);
@@ -20,14 +21,14 @@ const Register = () => {
         mobile,
         email,
         password,
-        role: 'user',
+        role: 'admin',
         status: 'pending'
       }
       const {data} = await axios.post('http://localhost:5000/register', userInfo)
       if(data.insertedId){
-        register({status:true})
+        register({status:true, mobile, email})
         navigate('/')
-        alert('successfully register')
+        toast.success('successfully register')
       }
   };
   return (

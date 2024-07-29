@@ -1,11 +1,12 @@
-import axios from 'axios';
 import { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../provider/AuthProvider';
 import toast from 'react-hot-toast';
+import useAxiosCommon from '../hooks/userAxiosCommon';
 const Register = () => {
   const navigate = useNavigate()
   const {register} = useContext(AuthContext);
+  const axiosCommon = useAxiosCommon()
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
@@ -21,10 +22,10 @@ const Register = () => {
         mobile,
         email,
         password,
-        role: 'admin',
+        role: 'user',
         status: 'pending'
       }
-      const {data} = await axios.post('http://localhost:5000/register', userInfo)
+      const {data} = await axiosCommon.post('http://localhost:5000/register', userInfo)
       if(data.insertedId){
         register({status:true, mobile, email})
         navigate('/')

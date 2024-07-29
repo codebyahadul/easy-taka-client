@@ -1,17 +1,31 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
+import useAxiosCommon from "../../hooks/userAxiosCommon";
+import toast from "react-hot-toast";
 
 const AdminPage = () => {
     const [seeUsers, setSeeUsers] = useState(true)
     const [seeTransactions, setSeeTransactions] = useState(false)
-    const [users, setUsers] = useState([])
-    useEffect(() => {
-        const fetchData = async () => {
-            const { data } = await axios.get('http://localhost:5000/users')
-            setUsers(data)
-        };
-        fetchData()
-    }, [seeUsers])
+    const axiosCommon = useAxiosCommon()
+    // get all the users
+    const { data: users = [], refetch } = useQuery({
+        queryKey: ['users'],
+        queryFn: async () => {
+            const { data } = await axiosCommon.get('/users')
+            return data;
+        },
+    })
+    // handle confirmed
+    const handleConfirmed = async (mobile) => {
+        const { data } = await axiosCommon.patch(`/user/update/${mobile}`, {
+            status: 'confirmed',
+            balance: 40,
+        })
+        if(data.modifiedCount){
+            toast.success('User Activated successfully')
+            refetch()
+        }
+    }
     return (
         <div>
             <div className="text-center text-sm md:text-sm">
@@ -33,40 +47,44 @@ const AdminPage = () => {
                 {/* All users */}
                 {seeUsers && <table className="min-w-[100%] shadow-md border mx-auto border-gray-100 my-6">
                     <thead>
-                        <tr className="bg-gray-400 text-white">
-                            <th className="py-4 px-6 text-lg text-left border-b">User Email</th>
-                            <th className="py-4 px-6 text-lg text-left border-b">User Phone</th>
-                            <th className="py-4 px-6 text-lg text-left border-b">User Role</th>
-                            <th className="py-4 px-6 text-lg border-b text-end">Action</th>
+                        <tr className="bg-gray-400 text-white *:py-4 *:px-6 *:text-sm *:lg:text-lg *:text-left *:border-b">
+                            <th>User Email</th>
+                            <th>User Phone</th>
+                            <th>User Role</th>
+                            <th>Status</th>
+                            <th className="text-center">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
-                            users?.map(user => {
-                                <tr key={user?._id} className="hover:bg-gray-50 border-b transition duration-300 *:py-4 *:px-6 *:border-b *:text-sm *:md:text-lg *:lg:text-xl font-medium">
+                            users.map(user => (
+                                <tr key={user?._id} className="hover:bg-gray-50 border-b transition duration-300 *:py-4 *:px-6 *:border-b *:text-xs *:md:text-sm *:lg:text-lg font-medium">
                                     <td>{user?.email ? user?.email : 'Not Found'}</td>
                                     <td>{user?.mobile}</td>
                                     <td>{user?.role}</td>
-                                    <td className="text-end">
-                                        <button className="bg-gray-500 hover:scale-110 scale-100 transition-all duration-100 text-white py-2 px-4 rounded-md">Details</button>
+                                    <td>{user?.status}</td>
+                                    <td className="flex gap-1">
+                                        <button onClick={() => handleConfirmed(user.mobile)} disabled={user.role === 'admin' || user.status === 'confirmed'} className="bg-green-500 text-white text-sm py-1 px-2 rounded-md disabled:cursor-not-allowed disabled:opacity-50">Activated</button>
+                                        <button disabled={user.role === 'admin'} className="bg-red-600 text-white text-sm py-1 px-2 rounded-md disabled:cursor-not-allowed">Blocked</button>
                                     </td>
                                 </tr>
-                            })
+                            ))
                         }
+
                     </tbody>
                 </table>}
 
                 {/* Transactions */}
                 {seeTransactions && <table className="min-w-[100%] shadow-md border mx-auto border-gray-100 my-6">
                     <thead>
-                        <tr className="bg-gray-400 text-white">
-                            <th className="py-4 px-6 text-lg text-left border-b">User Email</th>
-                            <th className="py-4 px-6 text-lg text-left border-b">User Phone</th>
-                            <th className="py-4 px-6 text-lg text-left border-b">Transactions</th>
+                        <tr className="bg-gray-400 text-white *:py-4 *:px-6 *:text-sm *:lg:text-lg *:text-left *:border-b">
+                            <th>User Email</th>
+                            <th>User Phone</th>
+                            <th>Transactions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr className="hover:bg-gray-50 border-b transition duration-300 *:py-4 *:px-6 *:border-b *:text-sm *:md:text-lg *:lg:text-xl font-medium">
+                        <tr className="hover:bg-gray-50 border-b transition duration-300 *:py-4 *:px-6 *:border-b *:text-xs *:md:text-sm *:lg:text-lg font-medium">
                             <td>something</td>
                             <td>Dual Speaker</td>
                             <td>Dual Speaker</td>

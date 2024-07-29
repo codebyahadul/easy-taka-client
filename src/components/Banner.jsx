@@ -5,12 +5,12 @@ const Banner = () => {
     const [role] = useRole()
     return (
         <>
-        {
-            role === 'user' && <UserPage />
-        }
-        {
-            role === 'admin' && <AdminPage />
-        }
+            {
+                role === 'user' && <UserPage />
+            }
+            {
+                role === 'admin' && <AdminPage />
+            }
         </>
     );
 };

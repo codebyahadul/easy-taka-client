@@ -17,12 +17,17 @@ const Login = () => {
       mobileOrEmail,
       password
     }
-    const {data} = await axios.post('http://localhost:5000/login', userInfo)
+    try {
+      const {data} = await axios.post('http://localhost:5000/login', userInfo)
     if(data.message === true){
       navigate('/')
       toast.success("log in successfully")
       login({status: true, email: mobileOrEmail, mobile: mobileOrEmail})
     }
+    } catch (error) {
+      toast.error("Invalid credentials. Please enter the correct email and password")
+    }
+    
   };
 
   return (

@@ -5,10 +5,10 @@ import useAuth from "./useAuth";
 const useRole = () => {
     const axiosCommon = useAxiosCommon()
     const {user} = useAuth()
-    const { data = [], isLoading } = useQuery({
+    const { data = {}, isLoading } = useQuery({
         queryKey: ['role'],
         queryFn: async () => {
-            const { data } = await axiosCommon.get(`/user/${user?.email ? user?.email: user?.mobile}`)
+            const { data } = await axiosCommon.get(`/user/${user?.email ? user?.email: user?.mobileOrEmail}`)
             return data
         }
     })

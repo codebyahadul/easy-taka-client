@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import useAxiosCommon from "../../hooks/userAxiosCommon";

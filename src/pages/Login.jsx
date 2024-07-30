@@ -22,7 +22,7 @@ const Login = () => {
     if(data.message === true){
       navigate('/')
       toast.success("log in successfully")
-      login({status: true, email: mobileOrEmail, mobile: mobileOrEmail})
+      login({status: true, mobileOrEmail})
     }
     } catch (error) {
       toast.error("Invalid credentials. Please enter the correct email and password")

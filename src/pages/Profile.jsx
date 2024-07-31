@@ -1,29 +1,26 @@
 import axios from "axios";
 import { useContext, useState } from "react";
 import toast from "react-hot-toast";
-import useAxiosCommon from "../../hooks/userAxiosCommon";
-import { AuthContext } from "../../provider/AuthProvider";
-import { useQuery } from "@tanstack/react-query";
+import useAxiosCommon from "../hooks/userAxiosCommon";
 import { FaSpinner } from "react-icons/fa";
+import useCurrentUser from "../hooks/useCurrentUser";
+import { AuthContext } from "../provider/AuthProvider";
 
 const Profile = () => {
     const [imagePreview, setImagePreview] = useState()
     const [imageText, setImageText] = useState('Upload Img')
     const [openModal, setOpenModal] = useState(false);
     const [loading, setLoading] = useState(false)
-    const { user } = useContext(AuthContext)
     const axiosCommon = useAxiosCommon()
+    const {user} = useContext(AuthContext)
+    // get current user
+    const [currentUser, refetch] = useCurrentUser()
+
     const handleImageChange = image => {
         setImagePreview(URL.createObjectURL(image))
         setImageText(image.name)
     }
-    const {data: currentUser = {}, refetch} = useQuery({
-        queryKey: ['user', 'profile'],
-        queryFn: async () => {
-            const {data} = await axiosCommon.get(`/user/${user?.mobileOrEmail}`)
-            return data;
-        }
-    })
+
     const handleUpdate = async (e) => {
         e.preventDefault();
         const form = e.target;
@@ -64,7 +61,8 @@ const Profile = () => {
                 {/* profile name & role */}
                 <div className="space-y-1 pt-8 text-center">
                     <h1 className="text-xl md:text-2xl">{currentUser?.name}</h1>
-                    <p className="text-sm text-gray-400">Normal User</p>
+                    <p className="text-sm text-gray-400">Email: {currentUser.email}</p>
+                    <p className="text-sm text-gray-400">Mobile: {currentUser.mobile}</p>
                 </div>
                 {/* post , followers following  */}
                 <div className=" px-4 space-y-2">
@@ -111,7 +109,7 @@ const Profile = () => {
                                         <div className='flex flex-col w-max mx-auto text-center'>
                                             <label>
                                                 <input
-                                                disabled = {loading}
+                                                    disabled={loading}
                                                     onChange={e => handleImageChange(e.target.files[0])}
                                                     className='disabled:cursor-not-allowed text-sm cursor-pointer w-36 hidden'
                                                     type='file'

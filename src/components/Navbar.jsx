@@ -2,22 +2,14 @@ import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 import User from '../assets/user.png';
-import useAxiosCommon from "../hooks/userAxiosCommon";
-import { useQuery } from "@tanstack/react-query";
+import useCurrentUser from "../hooks/useCurrentUser";
 const Navbar = () => {
   const { logout, user } = useContext(AuthContext)
   const [toggle, setToggle] = useState(false)
-  const axiosCommon = useAxiosCommon()
+  const [currentUser] = useCurrentUser()
   const handleLogOut = () => {
     logout()
   }
-  const {data: balance = 0} = useQuery({
-    queryKey: ['user', user?.mobileOrEmail],
-    queryFn: async () => {
-      const {data} = await axiosCommon.get(`/user/balance/${user?.mobileOrEmail}`)
-      return data.balance;
-    }
-  })
   //  handle check balance
   const handleCheckBalance = async () => {
     setToggle(!toggle)
@@ -30,15 +22,15 @@ const Navbar = () => {
         {
           user && <div onClick={handleCheckBalance} className="cursor-pointer px-1 border rounded-md text-xs md:text-sm lg:text-lg font-medium min-w-[100px] md:min-w-[150px] lg:min-w-[200px]">
             {
-              toggle ? <p>{balance}.00 tk</p> : <button className="border-none">Check Balance</button>
+              toggle ? <p>{currentUser.balance}.00 tk</p> : <button className="border-none">Check Balance</button>
             }
           </div>
         }
         {
           user ? <div onClick={() => setDropDownState(!dropDownState)} className="relative flex transition-transform">
-            <img className="size-10 cursor-pointer" src={User} alt="img" />
+            <img className="size-12 cursor-pointer border rounded-full p-1" src={currentUser?.img_url ? currentUser?.img_url: User} alt="img" />
             {dropDownState && (
-              <ul className=" z-10 bg-gray-200 absolute right-0 top-11 flex w-[200px] flex-col rounded-lg text-center *:cursor-pointer">
+              <ul className=" z-10 py-3 bg-gray-200 absolute right-0 top-11 flex w-[200px] flex-col rounded-lg text-center *:cursor-pointer">
                 <Link to={'/profile'} className="group flex flex-col pt-1 hover:bg-gray-100 rounded-t-lg ">
                   Profile<span className="mt-[1px] h-[3px] w-[0px] rounded-full "></span>
                 </Link>

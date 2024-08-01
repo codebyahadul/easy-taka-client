@@ -15,36 +15,36 @@ const UserPage = () => {
                     <BiSend size={30} />
                     <button className="text-xs md:text-sm lg:text-lg font-medium">Send Money </button>
                 </Link>
-                <div className="hover:bg-gray-200">
+                <Link to='/cashOut' className="hover:bg-gray-200">
                     <IoCashOutline size={30} />
                     <button className="text-xs md:text-sm lg:text-lg font-medium">
                         Cash Out
                     </button>
-                </div>
-                <div className="hover:bg-gray-200">
+                </Link>
+                <Link to='/mobileRecharge' className="hover:bg-gray-200">
                     <TbRecharging size={30} />
                     <button className="text-xs md:text-sm lg:text-lg font-medium">
                         Mobile Recharge
                     </button>
-                </div>
-                <div className="hover:bg-gray-200">
+                </Link>
+                <Link to="/addMoney" className="hover:bg-gray-200">
                     <FaAddressCard size={30} />
                     <button className="text-xs md:text-sm lg:text-lg font-medium">
                         Add Money
                     </button>
-                </div>
-                <div className="hover:bg-gray-200">
+                </Link>
+                <Link to='/payBill' className="hover:bg-gray-200">
                     <FaLightbulb size={30} />
                     <button className="text-xs md:text-sm lg:text-lg font-medium">
                         Pay Bill
                     </button>
-                </div>
-                <div className="hover:bg-gray-200">
+                </Link>
+                <Link to='remittance' className="hover:bg-gray-200">
                     <SiRemedyentertainment size={30} />
                     <button className="text-xs md:text-sm lg:text-lg font-medium">
                         Remittance
                     </button>
-                </div>
+                </Link>
                 <div className="hover:bg-gray-200">
                     <IoBook size={30} />
                     <button className="text-xs md:text-sm lg:text-lg font-medium">

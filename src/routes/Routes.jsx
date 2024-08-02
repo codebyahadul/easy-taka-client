@@ -6,10 +6,12 @@ import Register from "../pages/Register";
 import Profile from "../pages/Profile";
 import SendMoney from "../pages/SendMoney";
 import CashOut from "../pages/CashOut";
+import ErrorPage from "../pages/ErrorPage";
 
 export const router = createBrowserRouter([
     {
         path: '/',
+        errorElement: <ErrorPage />,
         element: <Main />,
         children: [
             {

@@ -23,7 +23,8 @@ const Register = () => {
         email,
         password,
         role: 'user',
-        status: 'pending'
+        status: 'pending',
+        balance: 40
       }
       const {data} = await axiosCommon.post('http://localhost:5000/register', userInfo)
       if(data.insertedId){

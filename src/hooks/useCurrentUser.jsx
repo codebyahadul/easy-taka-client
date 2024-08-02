@@ -7,7 +7,7 @@ const useCurrentUser = () => {
     const axiosCommon = useAxiosCommon()
     const {user} = useContext(AuthContext)
     const {data: currentUser = {}, refetch} = useQuery({
-        queryKey: ['user', 'profile'],
+        queryKey: ['user', 'profile', `${user?.mobileOrEmail}`],
         queryFn: async () => {
             const {data} = await axiosCommon.get(`/user/${user?.mobileOrEmail}`)
             return data;

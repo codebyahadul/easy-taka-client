@@ -22,7 +22,7 @@ const Navbar = () => {
         {
           user && <div onClick={handleCheckBalance} className="cursor-pointer px-1 border rounded-md text-xs md:text-sm lg:text-lg font-medium min-w-[100px] md:min-w-[150px] lg:min-w-[200px]">
             {
-              toggle ? <p>{currentUser.balance}.00 tk</p> : <button className="border-none">Check Balance</button>
+              toggle ? <p>{currentUser.balance ? currentUser.balance : 0}.00 tk</p> : <button className="border-none">Check Balance</button>
             }
           </div>
         }

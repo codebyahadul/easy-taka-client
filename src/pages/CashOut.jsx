@@ -1,9 +1,35 @@
+import toast from "react-hot-toast";
 import useCurrentUser from "../hooks/useCurrentUser";
+import useAxiosCommon from "../hooks/userAxiosCommon";
 
 const CashOut = () => {
     const [currentUser] = useCurrentUser()
+    const axiosCommon = useAxiosCommon()
     const handleSendMoney = async e => {
-        e.preventDefault();
+        e.preventDefault()
+        const form = e.target;
+        const recipient = form.recipient.value;
+        const amount = parseInt(form.amount.value);
+        const password = form.password.value;
+        if(amount < 50) {
+            return toast.error('Less than 50 taka is not allowed for transactions')
+        }
+        if(amount > currentUser?.balance ){
+            return toast.error("Insufficient balance")
+        }
+        const cashOut = {
+            recipient, amount, password, mobile: currentUser?.mobile, cutMoney: amount >100 ? amount + 5 : amount
+        }
+       try {
+        const {data} = await axiosCommon.post('/cashOut', cashOut)
+        if(data.insertedId){
+            toast.success(`Cash Out successful.
+                TransactionId: ${data.transactionId}`)
+        }
+       } catch (error) {
+        toast.error(error?.message)
+       }
+
     }
     return (
         <div className="max-w-[300px] space-y-8 rounded-2xl bg-white px-6 py-8 shadow-md  md:max-w-[350px] lg:max-w-[600px] mx-auto border-2">

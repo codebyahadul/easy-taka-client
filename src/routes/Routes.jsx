@@ -7,6 +7,7 @@ import Profile from "../pages/Profile";
 import SendMoney from "../pages/SendMoney";
 import CashOut from "../pages/CashOut";
 import ErrorPage from "../pages/ErrorPage";
+import WaitingPage from "../pages/WaitingPage";
 
 export const router = createBrowserRouter([
     {
@@ -17,6 +18,10 @@ export const router = createBrowserRouter([
             {
                 path: '/',
                 element: <Home />
+            },
+            {
+                path: '/waiting',
+                element: <WaitingPage />
             },
             {
                 path: '/login',
@@ -41,5 +46,5 @@ export const router = createBrowserRouter([
             }
         ]
     },
-    
+
 ])

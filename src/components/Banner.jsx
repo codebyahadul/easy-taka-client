@@ -4,8 +4,8 @@ import AgentPage from "../pages/Agent/AgentPage";
 import UserPage from "../pages/User/UserPage";
 import WaitingPage from "../pages/WaitingPage";
 const Banner = () => {
-    const [role, status, isLoading] = useRole()
-    if (isLoading || status === 'pending') {
+    const [role, status] = useRole()
+    if (status === 'pending') {
         return <WaitingPage />
     }
     return (

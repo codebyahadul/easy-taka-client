@@ -10,7 +10,6 @@ const UserPage = () => {
         <div>
             <h1 className="text-lg md:text-xl font-medium my-3 md:my-5">Top Services:</h1>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 items-center gap-5 md:gap-8 *:border-2 *:rounded-md *:w-[100px] *:md:w-[200px] *:lg:w-[200px] *:h-[110px] *:p-3 *:md:p-5 *:cursor-pointer *:flex *:items-center *:flex-col *:justify-center *:gap-1">
-
                 <Link to='/sendMoney' className="hover:bg-gray-200">
                     <BiSend size={30} />
                     <button className="text-xs md:text-sm lg:text-lg font-medium">Send Money </button>
